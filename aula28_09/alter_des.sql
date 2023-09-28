@@ -58,3 +58,11 @@ alter table Aluno change telefone telefone varchar(15);
 alter table Area change nomeArea nomeArea varchar(100);
 
 alter table Aluno change telefone tel varchar(15);
+
+delete from Aluno where ra = "355";
+delete from Curso where idCurso = 10 and idArea = 1;
+
+delete from Aluno;
+
+alter table Aluno drop email;
+select * from Aluno;
