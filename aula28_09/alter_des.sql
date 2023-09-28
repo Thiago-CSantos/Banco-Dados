@@ -64,5 +64,7 @@ delete from Curso where idCurso = 10 and idArea = 1;
 
 delete from Aluno;
 
+update Curso set nomeCurso = "Engenharia de Software" where idCurso = 10;
+
 alter table Aluno drop email;
-select * from Aluno;
+select * from Curso;
