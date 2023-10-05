@@ -37,5 +37,6 @@ select sum(valor) from Produtos;
 select tipo, sum(quantidade) from Produtos group by tipo;
 select fabricante, sum(quantidade) from Produtos group by fabricante;
 select tipo, fabricante, sum(quantidade) as Total from Produtos group by tipo, fabricante; 
+select tipo, sum(quantidade*valor)from Produtos group by tipo;
 
 update Produtos set fabricante = null where id=6;
