@@ -34,7 +34,7 @@ select max(quantidade) from Produtos;
 select min(valor) from Produtos;
 select sum(valor) from Produtos;
 
-select tipo, sum(quantidade) from Produtos group by tipo;
+select tipo, sum(quantidade) from Produtos group by  tipo having sum(quantidade)>200;
 select fabricante, sum(quantidade) from Produtos group by fabricante;
 select tipo, fabricante, sum(quantidade) as Total from Produtos group by tipo, fabricante; 
 select tipo, sum(quantidade*valor)from Produtos group by tipo;
