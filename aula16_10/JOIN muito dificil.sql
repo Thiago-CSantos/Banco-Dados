@@ -1,5 +1,6 @@
 
-drop table cliente;
+create database Empresas;
+use Empresas;
 create table Cliente(
 	cod_cli int primary key,
     nome_cli varchar(40),
@@ -60,7 +61,7 @@ INSERT INTO Pedido (num_ped, prazo_entr, cod_cli, cod_vend)
 VALUES (2, 5, 2, 2);
 
 INSERT INTO Pedido (num_ped, prazo_entr, cod_cli, cod_vend)
-VALUES (3, 10, 3, 1);
+VALUES (3, 10, 3, 3);
 
 INSERT INTO Pedido (num_ped, prazo_entr, cod_cli, cod_vend)
 VALUES (4, 22, 4, 1);
@@ -104,15 +105,40 @@ VALUES (3, 'Vendedor 3', 6000.00);
 INSERT INTO Vendedor (cod_vend, nome_vend, saldo_fixo)
 VALUES (4, 'Vendedor 4', 9000.00);
 
-SELECT Cliente.nome_cli, COUNT(Pedido.num_ped)
-FROM Cliente
-LEFT JOIN Pedido ON Cliente.cod_cli = Pedido.cod_cli
-WHERE Cliente.nome_cli = 'João'
-GROUP BY Cliente.nome_cli;
+#2)
+select Pedido.num_ped, Produto.desc_prod, Vendedor.nome_vend 
+from Pedido inner join Vendedor on Pedido.cod_vend = Vendedor.cod_vend
+inner join Item_Pedido on Pedido.num_ped = Item_Pedido.num_ped
+inner join Produto on Item_Pedido.cod_prod = Produto.cod_prod;
 
-select Pedido.num_ped, Produto.desc_prod, Vendedor.nome_vend
-from Pedido left join Vendedor on Pedido.num_ped = Vendedor.cod_vend
-where ;
+#3)
+select Vendedor.nome_vend
+from Pedido inner join Vendedor on Pedido.cod_vend = Vendedor.cod_vend
+where Pedido.prazo_entr = 5;
 
+#4)
+select Cliente.* 
+from Cliente inner join Pedido on Cliente.cod_cli = Pedido.cod_cli
+inner join Item_Pedido on Pedido.num_ped = Item_Pedido.num_ped
+inner join Produto on Produto.cod_prod = Item_Pedido.cod_prod
+where Produto.desc_prod = "Produto 3" and Cliente.cidade = "Cidade 3";
 
+#5)
+select Item_Pedido.num_ped, sum(Produto.val_unit * Item_Pedido.qtd_ped)
+from Item_Pedido inner join Produto on Item_Pedido.cod_prod = Produto.cod_prod group by num_ped;
 
+#6)
+select Cliente.cidade, count(Pedido.num_ped)
+from Pedido inner join Cliente on Pedido.cod_cli = Cliente.cod_cli group by cidade;
+
+#7)
+select Vendedor.nome_vend 
+from Vendedor inner join Pedido on Vendedor.cod_vend = Pedido.cod_vend
+inner join Item_Pedido on Item_Pedido.num_ped = Pedido.num_ped
+inner join Produto on Produto.cod_prod = Item_Pedido.cod_prod
+and Produto.desc_prod = "Produto 1"; 
+
+#8)
+select Cliente.nome_cli, count(Pedido.num_ped)
+from Cliente inner join Pedido on Cliente.cod_cli = Pedido.cod_cli
+group by Cliente.cod_cli having count(Pedido.num_ped)>=1;
