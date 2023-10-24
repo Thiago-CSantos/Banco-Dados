@@ -1,4 +1,3 @@
-
 create database Empresas;
 use Empresas;
 create table Cliente(
@@ -142,3 +141,25 @@ and Produto.desc_prod = "Produto 1";
 select Cliente.nome_cli, count(Pedido.num_ped)
 from Cliente inner join Pedido on Cliente.cod_cli = Pedido.cod_cli
 group by Cliente.cod_cli having count(Pedido.num_ped)>=1;
+
+#9)
+select distinct(Cliente.cli_nome)
+from Item_Pedido inner join Pedido
+on Pedido.cod_cli = cliente.cod_cli
+group by Item_Pedido.num_ped
+having count(cod_prod) > 3;
+
+#10)
+select Cliente.nome_cli, Vendedor.nome_vend
+from Pedido inner join Vendedor on Vendedor.cod_vend = Pedido.cod_vend
+inner join Cliente on Cliente.cod_cli = Pedido.cod_cli
+order by Cliente.nome_cli, num_ped desc;  #asc Ascendente, desc Descendente
+
+select * from Cliente
+where nome_cli like "Cliente%"; #o % para buscar Cliente idenpendo do que vem de pois de 'Cliente'
+
+#like("_ _ _") corresponde a qualquer String com exatamente 3 caracteres pq tem "_ _ _"
+#like("_ _ _%") corresponde a qualquer String com exatamente 3 caracteres pq tem "_ _ _"
+#like("a_x_%")
+
+
