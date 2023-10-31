@@ -98,4 +98,41 @@ where Voo.idVoo like "_Q%";
 
 select Piloto.nomePiloto, Piloto.salario, CompanhiaAerea.descricao, Voo.idVoo from Voo
 inner join Piloto on Voo.piloto = Piloto.idPiloto
-inner join CompanhiaAerea on Piloto.compamhia = CompanhiaAerea.idCompanhia;
+inner join CompanhiaAerea on Piloto.companhia = CompanhiaAerea.idCompanhia;
+
+#ex07 alterar o horario do Voo JJ3344 para 21:15
+update Voo set hora = "21:15:00"
+where Voo.idVoo = "JJ3344"; 
+select * from Voo;
+
+#EX08 alterar o valor da graficação do piloto
+# Cristiano Pereira para R$ 2000,00
+update Piloto set Piloto.salario = 2000.00
+where Piloto.nomePiloto = "Cristiano Pereira";
+select * from Piloto;
+
+#EX09 Apagar a coluna pais da tabela companhiaAerea
+alter table CompanhiaAerea drop column pais;
+select * from CompanhiaAerea;
+
+#EX10 Apagar os voos com data 22/08/2023
+delete from Voo where datas = "2023-08-22";
+select * from Voo;
+
+#EX11 Exibir a quantidade de voos do piloto Anderson Anderson Frisanco
+select count(Voo.piloto) from Voo
+inner join Piloto on Voo.piloto = Piloto.idPiloto
+where Piloto.nomePiloto = 'Anderson Frisanco';
+
+#EX12 Exibir a quantidade de voos do piloto Maycon que partiu de campinas
+select count(Voo.piloto) from Voo
+inner join Piloto on Voo.piloto = Piloto.idPiloto
+inner join Aeroporto on Voo.aeroportoOrigem = Aeroporto.idAeroporto
+where Piloto.nomePiloto = 'Cristiano Pereira' and  Aeroporto.cidade = "Campinas";
+
+#Exibir os dados dos voos das companhias brasileiras que partiram de Miami
+select Voo.* from Voo
+inner join Piloto on Voo.piloto = Piloto.idPiloto
+inner join CompanhiaAerea on Piloto.companhia = CompanhiaAerea.idCompanhia
+where CompanhiaAerea.pais = "Brasil"
+inner join 
